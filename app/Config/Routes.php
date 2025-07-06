@@ -27,9 +27,18 @@ $routes->group('keranjang', ['filter' => 'auth'], function ($routes) {
     $routes->post('edit', 'TransaksiController::cart_edit');
     $routes->get('delete/(:any)', 'TransaksiController::cart_delete/$1');
     $routes->get('clear', 'TransaksiController::cart_clear');
-    // Rute cetak sudah dipindahkan dari sini
 });
 
-// --- PINDAHKAN KE SINI ---
-// Letakkan sebagai rute mandiri
 $routes->get('transaksi/cetak/(:num)', 'TransaksiController::cetak/$1', ['filter' => 'auth']);
+
+$routes->get('checkout', 'TransaksiController::checkout');
+$routes->get('getcity', 'TransaksiController::getcity');
+$routes->get('getcost', 'TransaksiController::getcost');
+$routes->post('buy', 'TransaksiController::buy');
+
+$routes->get('profile', 'Home::profile', ['filter' => 'auth']);
+$routes->get('api', 'ApiController::index');
+
+$routes->group('api', function ($routes) {
+    $routes->post('monthly', 'ApiController::monthly');
+});
